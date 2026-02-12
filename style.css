@@ -1,0 +1,328 @@
+/* ------------------ */
+/* VARIABLES / THEME */
+/* ------------------ */
+:root {
+    --bg1: #ffd6e0;      /* soft pastel pink */
+    --bg2: #ffe0f7;      /* blush/lavender */
+    --bg3: #ffc1e3;      /* light pink */
+    --bg4: #ff8fa3;      /* soft rose */
+    --card-bg: rgba(255, 240, 245, 0.25); /* glassy soft overlay */
+    --text-color: #b3003c;  /* deep rose */
+    --accent: #ee2251;      /* romantic accent */
+}
+
+/* Light mode variables (optional) */
+body.light {
+    --bg1: #fff0f5;
+    --bg2: #ffd6e0;
+    --bg3: #ffe0f7;
+    --bg4: #ff8fa3;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --text-color: #b3003c;
+    --accent: #ff4e78;
+}
+
+/* ------------------ */
+/* GLOBAL STYLES */
+/* ------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+    background-size: 600% 600%; /* make animation cover entire screen */
+    animation: gradientMove 25s ease infinite;  /* slower, smooth full-screen flow */
+    color: var(--text-color);
+    overflow: hidden;
+    transition: background 0.5s;
+}
+
+/* ------------------ */
+/* GRADIENT ANIMATION (FULL SCREEN DIAGONAL) */
+/* ------------------ */
+@keyframes gradientMove {
+    0% { background-position: 100% 100%; }    /* bottom-right */
+    25% { background-position: 50% 0%; }      /* mid-top */
+    50% { background-position: 0% 50%; }      /* top-left */
+    75% { background-position: 50% 100%; }    /* mid-bottom */
+    100% { background-position: 100% 100%; }  /* back to bottom-right */
+}
+
+/* ------------------ */
+/* GLASS CARD */
+/* ------------------ */
+.glass-card {
+    width: 350px;
+    max-width: 90%;
+    padding: 40px;
+    border-radius: 20px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(255, 128, 160, 0.35); /* soft pink glow */
+    text-align: center;
+    transition: 0.3s;
+}
+
+/* ------------------ */
+/* INPUTS */
+/* ------------------ */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    box-shadow: 0 0 10px rgba(255, 128, 160, 0.6);
+}
+
+/* Password toggle */
+.password-wrapper {
+    position: relative;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+    cursor: pointer;
+}
+
+/* ------------------ */
+/* BUTTONS */
+/* ------------------ */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #ff8fa3, #ff4e78);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 128, 160, 0.6);
+}
+
+/* ------------------ */
+/* SHAKE ANIMATION FOR WRONG INPUTS */
+/* ------------------ */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.4s;
+}
+
+/* ------------------ */
+/* ERROR INPUTS */
+/* ------------------ */
+.input-error {
+    border: 2px solid #ff4e78;
+    box-shadow: 0 0 12px #ff4e78;
+}
+
+/* ------------------ */
+/* SUCCESS ANIMATION */
+/* ------------------ */
+.success {
+    animation: successPop 0.6s ease;
+}
+
+@keyframes successPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ------------------ */
+/* SPINNER */
+/* ------------------ */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid white;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    margin: auto;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ------------------ */
+/* MULTIPLE FLOATING HEARTS (DIAGONAL & LUXURY) */
+/* ------------------ */
+
+/* Container for multiple hearts */
+.hearts::before {
+    content: "💖 💕 💘 💞 💓 💗 💝 💟";
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    opacity: 0.8;
+    animation: floatHearts1 12s linear infinite;
+}
+
+/* Additional layers using pseudo-elements (simulate many hearts) */
+.hearts::after {
+    content: "💖 💕 💘 💞 💓 💗 💝 💟";
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    opacity: 0.6;
+    animation: floatHearts2 15s linear infinite;
+}
+
+/* KEYFRAMES FOR HEART LAYERS */
+@keyframes floatHearts1 {
+    0% { transform: translateX(90vw) translateY(100vh) rotate(0deg) scale(1); opacity: 0.5; }
+    25% { transform: translateX(70vw) translateY(75vh) rotate(15deg) scale(1.1); opacity: 0.7; }
+    50% { transform: translateX(50vw) translateY(50vh) rotate(-10deg) scale(1.2); opacity: 1; }
+    75% { transform: translateX(30vw) translateY(25vh) rotate(10deg) scale(1.1); opacity: 0.7; }
+    100% { transform: translateX(10vw) translateY(-10vh) rotate(0deg) scale(1); opacity: 0.5; }
+}
+
+@keyframes floatHearts2 {
+    0% { transform: translateX(80vw) translateY(110vh) rotate(10deg) scale(0.9); opacity: 0.4; }
+    25% { transform: translateX(60vw) translateY(80vh) rotate(-10deg) scale(1); opacity: 0.6; }
+    50% { transform: translateX(40vw) translateY(50vh) rotate(15deg) scale(1.1); opacity: 0.9; }
+    75% { transform: translateX(20vw) translateY(20vh) rotate(-15deg) scale(1); opacity: 0.6; }
+    100% { transform: translateX(10vw) translateY(-10vh) rotate(0deg) scale(0.9); opacity: 0.4; }
+}
+
+/* ------------------ */
+/* MULTIPLE FALLING ROSE PETALS */
+/* ------------------ */
+.petals::before {
+    content: "🌹 🌹 🌹 🌹 🌹 🌹 🌹";
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    opacity: 0.8;
+    animation: fallPetals1 14s linear infinite;
+}
+
+.petals::after {
+    content: "🌹 🌹 🌹 🌹 🌹 🌹 🌹";
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    opacity: 0.6;
+    animation: fallPetals2 16s linear infinite;
+}
+
+/* KEYFRAMES FOR PETAL LAYERS */
+@keyframes fallPetals1 {
+    0% { transform: translateX(90vw) translateY(-10vh) rotate(0deg) scale(1); opacity: 0.5; }
+    25% { transform: translateX(70vw) translateY(25vh) rotate(10deg) scale(1.1); opacity: 0.7; }
+    50% { transform: translateX(50vw) translateY(50vh) rotate(-15deg) scale(1.2); opacity: 1; }
+    75% { transform: translateX(30vw) translateY(75vh) rotate(15deg) scale(1.1); opacity: 0.7; }
+    100% { transform: translateX(10vw) translateY(110vh) rotate(0deg) scale(1); opacity: 0.5; }
+}
+
+@keyframes fallPetals2 {
+    0% { transform: translateX(80vw) translateY(-20vh) rotate(15deg) scale(0.8); opacity: 0.4; }
+    25% { transform: translateX(60vw) translateY(20vh) rotate(-10deg) scale(0.9); opacity: 0.6; }
+    50% { transform: translateX(40vw) translateY(50vh) rotate(10deg) scale(1); opacity: 0.9; }
+    75% { transform: translateX(20vw) translateY(80vh) rotate(-15deg) scale(0.9); opacity: 0.6; }
+    100% { transform: translateX(10vw) translateY(120vh) rotate(0deg) scale(0.8); opacity: 0.4; }
+}
+
+/* ------------------ */
+/* RESPONSIVE HEARTS & PETALS */
+/* ------------------ */
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .hearts::before { font-size: 18px; animation-duration: 12s; }
+    .hearts::after { font-size: 14px; animation-duration: 14s; }
+    .petals::before { font-size: 18px; animation-duration: 14s; }
+    .petals::after { font-size: 14px; animation-duration: 16s; }
+}
+
+/* Tablets / iPad */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .hearts::before { font-size: 22px; animation-duration: 12s; }
+    .hearts::after { font-size: 18px; animation-duration: 15s; }
+    .petals::before { font-size: 20px; animation-duration: 14s; }
+    .petals::after { font-size: 16px; animation-duration: 16s; }
+}
+
+/* Large screens / PC */
+@media (min-width: 1025px) {
+    .hearts::before { font-size: 26px; animation-duration: 12s; }
+    .hearts::after { font-size: 22px; animation-duration: 15s; }
+    .petals::before { font-size: 22px; animation-duration: 14s; }
+    .petals::after { font-size: 18px; animation-duration: 16s; }
+}
+
+/* ------------------ */
+/* RESPONSIVE ADJUSTMENTS */
+/* ------------------ */
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .glass-card {
+        width: 95%;
+        padding: 25px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+}
+
+/* Tablets / iPad */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .glass-card {
+        width: 80%;
+        padding: 35px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+}
+
+/* Large screens / PC */
+@media (min-width: 1025px) {
+    .glass-card {
+        width: 350px;
+        padding: 40px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+}
